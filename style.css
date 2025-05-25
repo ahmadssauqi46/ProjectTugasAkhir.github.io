@@ -1,0 +1,150 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    line-height: 1.6;
+    background-color: #fff;
+    color: #111;
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: #f4f4f4;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .logo {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #d10000;
+  }
+
+  nav a {
+    margin-left: 1.5rem;
+    text-decoration: none;
+    color: #111;
+  }
+
+  /* Banner dengan background dan teks tengah */
+  .banner {
+    position: relative;
+    height: 60vh;
+    background-image: url('bannerdiskon.png');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .banner-overlay {
+    background: rgba(0, 0, 0, 0.4);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .banner-text {
+    color: white;
+    text-align: center;
+  }
+
+  .banner-text h1 {
+    font-size: 4rem;
+  }
+
+  .banner-text p {
+    font-size: 2rem;
+  }
+
+  .highlight {
+    color: #ff4444;
+    font-size: 3rem;
+    font-weight: bold;
+  }
+
+  .produk-unggulan {
+    padding: 2rem;
+  }
+
+  .produk-unggulan h2 {
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .produk-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .produk {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    text-align: center;
+    border: 1px solid #ddd;
+    padding: 1rem;
+    border-radius: 8px;
+    background-color: #fff;
+    transition: 0.3s;
+    min-height: 400px;
+  }
+
+  .produk img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+  }
+
+  .produk:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .btn-detail {
+    margin-top: 1rem;
+    background-color: #d10000;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .btn-detail:hover {
+    background-color: #a80000;
+  }
+
+  footer {
+    text-align: center;
+    padding: 1rem;
+    background: #f4f4f4;
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    .banner-text h1 {
+      font-size: 2.5rem;
+    }
+
+    .banner-text p {
+      font-size: 1.5rem;
+    }
+
+    .highlight {
+      font-size: 2.2rem;
+    }
+  }

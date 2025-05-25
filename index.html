@@ -1,142 +1,59 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Website Sewa Tenda</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toko Online</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-<style>
-    * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: Arial, sans-serif;
-  background-color: #ffffff;
-  color: #333;
-}
-
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 40px;
-  border-bottom: 1px solid #ddd;
-}
-
-.nav-links {
-  display: flex;
-  gap: 20px;
-  list-style: none;
-}
-
-.nav-links a {
-  text-decoration: none;
-  color: #333;
-}
-
-.nav-right {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.sign-in,
-.join-now {
-  padding: 6px 12px;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-}
-
-.sign-in {
-  background-color: transparent;
-  color: #000;
-}
-
-.join-now {
-  background-color: #000;
-  color: #fff;
-}
-
-.content {
-  padding: 40px;
-}
-
-.section-1,
-.section-2 {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 40px;
-}
-
-.image-left,
-.image-right {
-  width: 45%;
-  height: auto;
-  object-fit: cover;
-}
-
-.text-box {
-  width: 45%;
-  padding: 30px;
-  color: white;
-}
-
-.dark-green {
-  background-color: #2d3f2f;
-}
-
-.text-box button {
-  margin-top: 15px;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 20px;
-  background-color: white;
-  color: #2d3f2f;
-  font-weight: bold;
-  cursor: pointer;
-}
-</style>
 <body>
-  <header class="navbar">
-    <div class="logo">LOGO</div>
+  <header>
+    <div class="logo">Tenda Rizky</div>
     <nav>
-      <ul class="nav-links">
-        <li><a href="#">MENU</a></li>
-        <li><a href="#">HARGA</a></li>
-        <li><a href="#">SELENGKAPNYA</a></li>
-      </ul>
+      <a href="#">Home</a>
+      <a href="#">Produk</a>
+      <a href="#">Tentang</a>
+      <a href="#">Kontak</a>
     </nav>
-    <div class="nav-right">
-      <a href="#">📍 Find a store</a>
-      <button class="sign-in">Sign In</button>
-      <button class="join-now">Join Now</button>
-    </div>
   </header>
 
-  <main class="content">
-    <section class="section-1">
-      <img src="Tenda-pesta.jpg" alt="Sewa Tenda" class="image-left" />
-      <div class="text-box dark-green">
-        <h2>Sewa Tenda</h2>
-        <p>Menyediakan berbagai jenis tenda</p>
-        <button>View the menu</button>
+  <section class="banner">
+    <div class="banner-overlay">
+      <div class="banner-text">
+        <h1>Tenda</h1>
+        <p><span class="highlight">Rizky</span> </p>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="section-2">
-      <div class="text-box dark-green">
-        <h2>Sewa Alat</h2>
-        <p>Menyediakan beberapa alat untuk kelengkapan acara</p>
-        <button>View the menu</button>
+  <section class="produk-unggulan">
+    <h2>Produk Unggulan</h2>
+    <div class="produk-list">
+      <div class="produk">
+        <img src="TENDA 1.jpg" alt="Tenda 1">
+        <p>Tenda Coklat mix Putih</p>
+        <button class="btn-detail">Lihat Detail</button>
       </div>
-      <img src="ALAT-PESTA4.png" alt="Sewa Alat" class="image-right" />
-    </section>
-  </main>
+      <div class="produk">
+        <img src="TENDA 2.jpg" alt="Tenda 2">
+        <p>Tenda Biru mix Emas</p>
+        <button class="btn-detail">Lihat Detail</button>
+      </div>
+      <div class="produk">
+        <img src="TENDA 3.jpg" alt="Tenda 3">
+        <p>Tenda</p>
+        <button class="btn-detail">Lihat Detail</button>
+      </div>
+      <div class="produk">
+        <img src="TENDA 4.jpg" alt="Tenda 4">
+        <p>Kaos Merah</p>
+        <button class="btn-detail">Lihat Detail</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Tenda Rizky. All rights reserved.</p>
+  </footer>
 </body>
 </html>
