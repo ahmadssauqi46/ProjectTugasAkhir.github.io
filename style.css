@@ -8,8 +8,8 @@
 body {
   font-family: 'Segoe UI', sans-serif;
   line-height: 1.6;
-  background-color: #FAF3E0; /* krem muda */
-  color: #333; /* abu tua */
+  background-color: #FAF3E0;
+  color: #333;
 }
 
 /* Header */
@@ -18,14 +18,14 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background: #FFF8F0; /* putih krem */
+  background: #FFF8F0;
   border-bottom: 1px solid #ddd;
 }
 
 .logo {
   font-weight: bold;
   font-size: 1.5rem;
-  color: #8B0000; /* merah marun */
+  color: #8B0000;
 }
 
 nav a {
@@ -34,54 +34,27 @@ nav a {
   color: #333;
 }
 
-/* Banner */
-.promo-section {
-  background: #fff;
-  padding: 3rem 2rem;
-  display: flex;
-  justify-content: center;
-}
-.banner {
-  position: relative;
-  height: 60vh;
-  background-image: url('bannerdiskon.png');
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.banner-overlay {
-  background: rgba(0, 0, 0, 0.4);
+/* Banner Gambar */
+.promo-banner {
   width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background-color: transparent;
+  padding: 2rem 0;
 }
 
-.banner-text {
-  color: white;
-  text-align: center;
+.banner-wrapper {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 1rem;
 }
 
-.banner-text h1 {
-  font-size: 4rem;
-}
-
-.banner-text p {
-  font-size: 2rem;
-}
-
-.highlight {
-  color: #61ff83; /* salmon */
-  font-size: 3rem;
-  font-weight: bold;
+.banner-full {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
 
 /* Produk Unggulan */
-
 .produk-unggulan {
   padding: 2rem;
 }
@@ -98,9 +71,6 @@ nav a {
 }
 
 .produk {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   text-align: center;
   border: 1px solid #ddd;
   padding: 1rem;
@@ -144,83 +114,4 @@ footer {
   background: #353534;
   margin-top: 2rem;
   color: white;
-}
-
-/* Responsif */
-@media (max-width: 768px) {
-  .banner-text h1 {
-    font-size: 2.5rem;
-  }
-
-  .banner-text p {
-    font-size: 1.5rem;
-  }
-
-  .highlight {
-    font-size: 2.2rem;
-  }
-}
-
-/* Banner Baru */
-.banner-content {
-  display: flex;
-  flex-wrap: wrap;
-  max-width: 1200px;
-  gap: 2rem;
-  align-items: center;
-  justify-content: center;
-}
-
-.banner-image {
-  flex: 1 1 40%;
-  position: relative;
-}
-
-.banner-image img {
-  width: 100%;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-.diskon-label {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  background-color: #8B0000;
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 50px;
-  font-weight: bold;
-  font-size: 1rem;
-}
-
-.banner-info {
-  flex: 1 1 50%;
-}
-
-.banner-info h2 {
-  font-size: 2.5rem;
-  color: #8B0000;
-  margin-bottom: 1rem;
-}
-
-.banner-info p {
-  font-size: 1.2rem;
-  margin-bottom: 1.5rem;
-  color: #333;
-}
-
-.btn-banner {
-  display: inline-block;
-  background-color: #FF6F61;
-  color: #fff;
-  padding: 0.75rem 1.5rem;
-  text-decoration: none;
-  font-weight: bold;
-  border-radius: 5px;
-  transition: 0.3s;
-}
-
-.btn-banner:hover {
-  background-color: #e85b4f;
 }
