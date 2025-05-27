@@ -10,7 +10,12 @@ body {
   line-height: 1.6;
   background-color: #FAF3E0;
   color: #333;
+  background: url('background\ nikah.jpg') no-repeat center center fixed;
+  background-size: cover;
+
+  
 }
+
 
 /* Header */
 header {
