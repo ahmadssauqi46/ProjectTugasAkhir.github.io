@@ -1,0 +1,27 @@
+[
+    {
+      "nama": "Tenda Coklat mix Putih",
+      "kategori": "tenda",
+      "gambar": "TENDA 1.jpg",
+      "harga": 5000
+    },
+    {
+      "nama": "Meja Bulat VIP",
+      "kategori": "meja",
+      "gambar": "MEJABUNDAR.jpg",
+      "harga":500000
+    },
+    {
+      "nama": "Kursi Putih",
+      "kategori": "kursi",
+      "gambar": "KURSIPUTIH.jpg",
+      "harga": 100000
+    },
+    {
+      "nama": "Tenda Dekorasi Premium",
+      "kategori": "tenda",
+      "gambar": "img/tenda-premium.jpg",
+      "harga": 300000
+    }
+  ]
+  

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Katalog Produk</title>
+  <link rel="stylesheet" href="produk.css">
+</head>
+<body>
+  <main>
+    <h1>Katalog Produk</h1>
+
+    <div class="filter">
+      <select id="kategoriFilter">
+        <option value="all">Semua Kategori</option>
+        <option value="tenda">Tenda Pernikahan</option>
+        <option value="meja">Meja</option>
+        <option value="kursi">Kursi</option>
+      </select>
+
+      <input type="text" id="searchInput" placeholder="Cari produk...">
+    </div>
+
+    <div class="produk-list" id="produkList"></div>
+
+    <section class="keranjang">
+      <h2>Keranjang</h2>
+      <label>Durasi sewa (hari): <input type="number" id="durasiSewa" value="1" min="1"></label>
+      <ul id="isiKeranjang"></ul>
+      <p>Total Harga: <span id="totalHarga">Rp 0</span></p>
+    </section>
+  </main>
+
+  <script>
+    const produkList = document.getElementById('produkList');
+    const kategoriFilter = document.getElementById('kategoriFilter');
+    const searchInput = document.getElementById('searchInput');
+    const isiKeranjang = document.getElementById('isiKeranjang');
+    const totalHarga = document.getElementById('totalHarga');
+    const durasiSewa = document.getElementById('durasiSewa');
+
+    let semuaProduk = [];
+    let keranjang = [];
+
+    fetch('produk.json')
+      .then(res => res.json())
+      .then(data => {
+        semuaProduk = data;
+        tampilkanProduk(data);
+      });
+
+    function tampilkanProduk(data) {
+      produkList.innerHTML = '';
+      data.forEach((item, index) => {
+        const el = document.createElement('div');
+        el.className = 'produk-item';
+        el.innerHTML = `
+          <img src="${item.gambar}" alt="${item.nama}">
+          <h3>${item.nama}</h3>
+          <p>Rp ${item.harga.toLocaleString()} / hari</p>
+          <button onclick='tambahKeranjang(${index})'>+ Keranjang</button>
+        `;
+        produkList.appendChild(el);
+      });
+    }
+
+    function tambahKeranjang(index) {
+      const item = semuaProduk[index];
+      keranjang.push(item);
+      updateKeranjang();
+    }
+
+    function updateKeranjang() {
+      const durasi = parseInt(durasiSewa.value);
+      isiKeranjang.innerHTML = '';
+      let total = 0;
+
+      keranjang.forEach(p => {
+        const li = document.createElement('li');
+        li.textContent = `${p.nama} - Rp ${p.harga.toLocaleString()} x ${durasi} hari`;
+        isiKeranjang.appendChild(li);
+        total += p.harga * durasi;
+      });
+
+      totalHarga.textContent = 'Rp ' + total.toLocaleString();
+    }
+
+    function filterProduk() {
+      const kategori = kategoriFilter.value;
+      const keyword = searchInput.value.toLowerCase();
+      const hasil = semuaProduk.filter(p =>
+        (kategori === 'all' || p.kategori === kategori) &&
+        p.nama.toLowerCase().includes(keyword)
+      );
+      tampilkanProduk(hasil);
+    }
+
+    kategoriFilter.addEventListener('change', filterProduk);
+    searchInput.addEventListener('input', filterProduk);
+    durasiSewa.addEventListener('input', updateKeranjang);
+  </script>
+</body>
+</html>
