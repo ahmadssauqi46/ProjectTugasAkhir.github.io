@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Katalog Produk</title>
-  <link rel="stylesheet" href="produk.css">
+  <link rel="stylesheet" href="produk.css" />
 </head>
+
 <body>
   <main>
     <h1>Katalog Produk</h1>
-
     <div class="filter">
       <select id="kategoriFilter">
         <option value="all">Semua Kategori</option>
@@ -17,20 +18,29 @@
         <option value="meja">Meja</option>
         <option value="kursi">Kursi</option>
       </select>
-
-      <input type="text" id="searchInput" placeholder="Cari produk...">
+      <input type="text" id="searchInput" placeholder="Cari produk..." />
     </div>
 
     <div class="produk-list" id="produkList"></div>
 
     <section class="keranjang">
       <h2>Keranjang</h2>
-      <label>Durasi sewa (hari): <input type="number" id="durasiSewa" value="1" min="1"></label>
+      <label>Durasi sewa (hari): <input type="number" id="durasiSewa" value="1" min="1" /></label>
       <ul id="isiKeranjang"></ul>
       <p>Total Harga: <span id="totalHarga">Rp 0</span></p>
+
+      <button id="checkoutBtn" class="btn-checkout">Checkout</button>
+
+      <div id="ringkasanCheckout" class="checkout-box" style="display:none;">
+        <h3>Ringkasan Pesanan</h3>
+        <ul id="daftarCheckout" class="checkout-list"></ul>
+        <div class="checkout-info">
+          <p><b>Durasi:</b> <span id="durasiCheckout"></span> hari</p>
+          <p><b>Total:</b> <span id="totalCheckout"></span></p>
+        </div>
+      </div>
     </section>
   </main>
-
   <script>
     const produkList = document.getElementById('produkList');
     const kategoriFilter = document.getElementById('kategoriFilter');
@@ -38,8 +48,14 @@
     const isiKeranjang = document.getElementById('isiKeranjang');
     const totalHarga = document.getElementById('totalHarga');
     const durasiSewa = document.getElementById('durasiSewa');
+    const checkoutBtn = document.getElementById('checkoutBtn');
+    const ringkasanCheckout = document.getElementById('ringkasanCheckout');
+    const daftarCheckout = document.getElementById('daftarCheckout');
+    const durasiCheckout = document.getElementById('durasiCheckout');
+    const totalCheckout = document.getElementById('totalCheckout');
 
     let semuaProduk = [];
+    // keranjang sekarang menyimpan objek {produk, qty}
     let keranjang = [];
 
     fetch('produk.json')
@@ -51,6 +67,10 @@
 
     function tampilkanProduk(data) {
       produkList.innerHTML = '';
+      if (data.length === 0) {
+        produkList.innerHTML = '<p style="text-align:center;">Produk tidak ditemukan.</p>';
+        return;
+      }
       data.forEach((item, index) => {
         const el = document.createElement('div');
         el.className = 'produk-item';
@@ -66,20 +86,31 @@
 
     function tambahKeranjang(index) {
       const item = semuaProduk[index];
-      keranjang.push(item);
+      // Cek kalau produk sudah ada di keranjang
+      const produkDiKeranjang = keranjang.find(p => p.produk.nama === item.nama);
+      if (produkDiKeranjang) {
+        produkDiKeranjang.qty += 1;
+      } else {
+        keranjang.push({ produk: item, qty: 1 });
+      }
       updateKeranjang();
     }
 
     function updateKeranjang() {
-      const durasi = parseInt(durasiSewa.value);
+      let durasi = parseInt(durasiSewa.value);
+      if (isNaN(durasi) || durasi < 1) {
+        durasi = 1;
+        durasiSewa.value = 1;
+      }
+
       isiKeranjang.innerHTML = '';
       let total = 0;
 
-      keranjang.forEach(p => {
+      keranjang.forEach(({ produk, qty }) => {
         const li = document.createElement('li');
-        li.textContent = `${p.nama} - Rp ${p.harga.toLocaleString()} x ${durasi} hari`;
+        li.textContent = `${produk.nama} - Rp ${produk.harga.toLocaleString()} x ${qty} pcs x ${durasi} hari`;
         isiKeranjang.appendChild(li);
-        total += p.harga * durasi;
+        total += produk.harga * qty * durasi;
       });
 
       totalHarga.textContent = 'Rp ' + total.toLocaleString();
@@ -98,6 +129,35 @@
     kategoriFilter.addEventListener('change', filterProduk);
     searchInput.addEventListener('input', filterProduk);
     durasiSewa.addEventListener('input', updateKeranjang);
+    window.addEventListener('load', updateKeranjang);
+
+    checkoutBtn.addEventListener('click', () => {
+      if (keranjang.length === 0) {
+        alert("Keranjang masih kosong.");
+        return;
+      }
+
+      let durasi = parseInt(durasiSewa.value);
+      if (isNaN(durasi) || durasi < 1) {
+        durasi = 1;
+        durasiSewa.value = 1;
+      }
+
+      daftarCheckout.innerHTML = '';
+      let total = 0;
+
+      keranjang.forEach(({ produk, qty }, i) => {
+        const li = document.createElement('li');
+        li.textContent = `${i + 1}. ${produk.nama} - Rp ${produk.harga.toLocaleString()} x ${qty} pcs x ${durasi} hari`;
+        daftarCheckout.appendChild(li);
+        total += produk.harga * qty * durasi;
+      });
+
+      durasiCheckout.textContent = durasi;
+      totalCheckout.textContent = 'Rp ' + total.toLocaleString();
+
+      ringkasanCheckout.style.display = 'block';
+    });
   </script>
 </body>
 </html>
