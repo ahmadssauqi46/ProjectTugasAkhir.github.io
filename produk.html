@@ -30,6 +30,7 @@
       <p>Total Harga: <span id="totalHarga">Rp 0</span></p>
 
       <button id="checkoutBtn" class="btn-checkout">Checkout</button>
+      <button id="hapusKeranjangBtn" class="btn-hapus"> Hapus Semua</button>
 
       <div id="ringkasanCheckout" class="checkout-box" style="display:none;">
         <h3>Ringkasan Pesanan</h3>
@@ -41,6 +42,7 @@
       </div>
     </section>
   </main>
+
   <script>
     const produkList = document.getElementById('produkList');
     const kategoriFilter = document.getElementById('kategoriFilter');
@@ -53,9 +55,9 @@
     const daftarCheckout = document.getElementById('daftarCheckout');
     const durasiCheckout = document.getElementById('durasiCheckout');
     const totalCheckout = document.getElementById('totalCheckout');
+    const hapusKeranjangBtn = document.getElementById('hapusKeranjangBtn');
 
     let semuaProduk = [];
-    // keranjang sekarang menyimpan objek {produk, qty}
     let keranjang = [];
 
     fetch('produk.json')
@@ -86,7 +88,6 @@
 
     function tambahKeranjang(index) {
       const item = semuaProduk[index];
-      // Cek kalau produk sudah ada di keranjang
       const produkDiKeranjang = keranjang.find(p => p.produk.nama === item.nama);
       if (produkDiKeranjang) {
         produkDiKeranjang.qty += 1;
@@ -106,15 +107,36 @@
       isiKeranjang.innerHTML = '';
       let total = 0;
 
-      keranjang.forEach(({ produk, qty }) => {
+      keranjang.forEach(({ produk, qty }, index) => {
         const li = document.createElement('li');
-        li.textContent = `${produk.nama} - Rp ${produk.harga.toLocaleString()} x ${qty} pcs x ${durasi} hari`;
+        li.innerHTML = `
+          ${produk.nama} - Rp ${produk.harga.toLocaleString()} x ${qty} pcs x ${durasi} hari
+          <button class="tombol-hapus-item" onclick="hapusSatuUnit(${index})">✖ Hapus 1</button>
+        `;
         isiKeranjang.appendChild(li);
         total += produk.harga * qty * durasi;
       });
 
       totalHarga.textContent = 'Rp ' + total.toLocaleString();
     }
+
+    // Fungsi hapus 1 unit produk di keranjang
+    function hapusSatuUnit(index) {
+      if (keranjang[index]) {
+        keranjang[index].qty -= 1;
+        if (keranjang[index].qty <= 0) {
+          keranjang.splice(index, 1);
+        }
+        updateKeranjang();
+        ringkasanCheckout.style.display = 'none';
+      }
+    }
+
+    hapusKeranjangBtn.addEventListener('click', () => {
+      keranjang = [];
+      updateKeranjang();
+      ringkasanCheckout.style.display = 'none';
+    });
 
     function filterProduk() {
       const kategori = kategoriFilter.value;
@@ -160,4 +182,5 @@
     });
   </script>
 </body>
+
 </html>
