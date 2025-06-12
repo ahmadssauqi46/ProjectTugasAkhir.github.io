@@ -42,145 +42,165 @@
       </div>
     </section>
   </main>
+<script>
+  // Mengambil elemen HTML yang akan digunakan
+  const produkList = document.getElementById('produkList');
+  const kategoriFilter = document.getElementById('kategoriFilter');
+  const searchInput = document.getElementById('searchInput');
+  const isiKeranjang = document.getElementById('isiKeranjang');
+  const totalHarga = document.getElementById('totalHarga');
+  const durasiSewa = document.getElementById('durasiSewa');
+  const checkoutBtn = document.getElementById('checkoutBtn');
+  const ringkasanCheckout = document.getElementById('ringkasanCheckout');
+  const daftarCheckout = document.getElementById('daftarCheckout');
+  const durasiCheckout = document.getElementById('durasiCheckout');
+  const totalCheckout = document.getElementById('totalCheckout');
+  const hapusKeranjangBtn = document.getElementById('hapusKeranjangBtn');
 
-  <script>
-    const produkList = document.getElementById('produkList');
-    const kategoriFilter = document.getElementById('kategoriFilter');
-    const searchInput = document.getElementById('searchInput');
-    const isiKeranjang = document.getElementById('isiKeranjang');
-    const totalHarga = document.getElementById('totalHarga');
-    const durasiSewa = document.getElementById('durasiSewa');
-    const checkoutBtn = document.getElementById('checkoutBtn');
-    const ringkasanCheckout = document.getElementById('ringkasanCheckout');
-    const daftarCheckout = document.getElementById('daftarCheckout');
-    const durasiCheckout = document.getElementById('durasiCheckout');
-    const totalCheckout = document.getElementById('totalCheckout');
-    const hapusKeranjangBtn = document.getElementById('hapusKeranjangBtn');
+  // Variabel array untuk menyimpan semua data produk dan isi keranjang
+  let semuaProduk = [];
+  let keranjang = [];
 
-    let semuaProduk = [];
-    let keranjang = [];
-
-    fetch('produk.json')
-      .then(res => res.json())
-      .then(data => {
-        semuaProduk = data;
-        tampilkanProduk(data);
-      });
-
-    function tampilkanProduk(data) {
-      produkList.innerHTML = '';
-      if (data.length === 0) {
-        produkList.innerHTML = '<p style="text-align:center;">Produk tidak ditemukan.</p>';
-        return;
-      }
-      data.forEach((item, index) => {
-        const el = document.createElement('div');
-        el.className = 'produk-item';
-        el.innerHTML = `
-          <img src="${item.gambar}" alt="${item.nama}">
-          <h3>${item.nama}</h3>
-          <p>Rp ${item.harga.toLocaleString()} / hari</p>
-          <button onclick='tambahKeranjang(${index})'>+ Keranjang</button>
-        `;
-        produkList.appendChild(el);
-      });
-    }
-
-    function tambahKeranjang(index) {
-      const item = semuaProduk[index];
-      const produkDiKeranjang = keranjang.find(p => p.produk.nama === item.nama);
-      if (produkDiKeranjang) {
-        produkDiKeranjang.qty += 1;
-      } else {
-        keranjang.push({ produk: item, qty: 1 });
-      }
-      updateKeranjang();
-    }
-
-    function updateKeranjang() {
-      let durasi = parseInt(durasiSewa.value);
-      if (isNaN(durasi) || durasi < 1) {
-        durasi = 1;
-        durasiSewa.value = 1;
-      }
-
-      isiKeranjang.innerHTML = '';
-      let total = 0;
-
-      keranjang.forEach(({ produk, qty }, index) => {
-        const li = document.createElement('li');
-        li.innerHTML = `
-          ${produk.nama} - Rp ${produk.harga.toLocaleString()} x ${qty} pcs x ${durasi} hari
-          <button class="tombol-hapus-item" onclick="hapusSatuUnit(${index})">✖ Hapus 1</button>
-        `;
-        isiKeranjang.appendChild(li);
-        total += produk.harga * qty * durasi;
-      });
-
-      totalHarga.textContent = 'Rp ' + total.toLocaleString();
-    }
-
-    // Fungsi hapus 1 unit produk di keranjang
-    function hapusSatuUnit(index) {
-      if (keranjang[index]) {
-        keranjang[index].qty -= 1;
-        if (keranjang[index].qty <= 0) {
-          keranjang.splice(index, 1);
-        }
-        updateKeranjang();
-        ringkasanCheckout.style.display = 'none';
-      }
-    }
-
-    hapusKeranjangBtn.addEventListener('click', () => {
-      keranjang = [];
-      updateKeranjang();
-      ringkasanCheckout.style.display = 'none';
+  // Mengambil data produk dari file JSON eksternal
+  fetch('produk.json')
+    .then(res => res.json())
+    .then(data => {
+      semuaProduk = data;
+      tampilkanProduk(data); // Menampilkan semua produk setelah berhasil diambil
     });
 
-    function filterProduk() {
-      const kategori = kategoriFilter.value;
-      const keyword = searchInput.value.toLowerCase();
-      const hasil = semuaProduk.filter(p =>
-        (kategori === 'all' || p.kategori === kategori) &&
-        p.nama.toLowerCase().includes(keyword)
-      );
-      tampilkanProduk(hasil);
+  // Fungsi untuk menampilkan produk dalam halaman
+  function tampilkanProduk(data) {
+    produkList.innerHTML = ''; // Kosongkan daftar sebelum menambahkan yang baru
+
+    if (data.length === 0) {
+      produkList.innerHTML = '<p style="text-align:center;">Produk tidak ditemukan.</p>';
+      return;
     }
 
-    kategoriFilter.addEventListener('change', filterProduk);
-    searchInput.addEventListener('input', filterProduk);
-    durasiSewa.addEventListener('input', updateKeranjang);
-    window.addEventListener('load', updateKeranjang);
-
-    checkoutBtn.addEventListener('click', () => {
-      if (keranjang.length === 0) {
-        alert("Keranjang masih kosong.");
-        return;
-      }
-
-      let durasi = parseInt(durasiSewa.value);
-      if (isNaN(durasi) || durasi < 1) {
-        durasi = 1;
-        durasiSewa.value = 1;
-      }
-
-      daftarCheckout.innerHTML = '';
-      let total = 0;
-
-      keranjang.forEach(({ produk, qty }, i) => {
-        const li = document.createElement('li');
-        li.textContent = `${i + 1}. ${produk.nama} - Rp ${produk.harga.toLocaleString()} x ${qty} pcs x ${durasi} hari`;
-        daftarCheckout.appendChild(li);
-        total += produk.harga * qty * durasi;
-      });
-
-      durasiCheckout.textContent = durasi;
-      totalCheckout.textContent = 'Rp ' + total.toLocaleString();
-
-      ringkasanCheckout.style.display = 'block';
+    // Menambahkan elemen produk satu per satu
+    data.forEach((item, index) => {
+      const el = document.createElement('div');
+      el.className = 'produk-item';
+      el.innerHTML = `
+        <img src="${item.gambar}" alt="${item.nama}">
+        <h3>${item.nama}</h3>
+        <p>Rp ${item.harga.toLocaleString()} / hari</p>
+        <button onclick='tambahKeranjang(${index})'>+ Keranjang</button>
+      `;
+      produkList.appendChild(el);
     });
-  </script>
+  }
+
+  // Fungsi untuk menambahkan produk ke keranjang
+  function tambahKeranjang(index) {
+    const item = semuaProduk[index];
+    const produkDiKeranjang = keranjang.find(p => p.produk.nama === item.nama);
+
+    // Jika sudah ada produk yang sama, tambahkan jumlahnya
+    if (produkDiKeranjang) {
+      produkDiKeranjang.qty += 1;
+    } else {
+      keranjang.push({ produk: item, qty: 1 });
+    }
+
+    updateKeranjang(); // Perbarui tampilan keranjang
+  }
+
+  // Fungsi untuk memperbarui isi keranjang dan menghitung total harga
+  function updateKeranjang() {
+    let durasi = parseInt(durasiSewa.value);
+    if (isNaN(durasi) || durasi < 1) {
+      durasi = 1;
+      durasiSewa.value = 1;
+    }
+
+    isiKeranjang.innerHTML = '';
+    let total = 0;
+
+    // Tambahkan item ke tampilan keranjang
+    keranjang.forEach(({ produk, qty }, index) => {
+      const li = document.createElement('li');
+      li.innerHTML = `
+        ${produk.nama} - Rp ${produk.harga.toLocaleString()} x ${qty} pcs x ${durasi} hari
+        <button class="tombol-hapus-item" onclick="hapusSatuUnit(${index})">✖ Hapus 1</button>
+      `;
+      isiKeranjang.appendChild(li);
+      total += produk.harga * qty * durasi;
+    });
+
+    totalHarga.textContent = 'Rp ' + total.toLocaleString(); // Tampilkan total harga
+  }
+
+  // Fungsi untuk menghapus 1 unit produk dari keranjang
+  function hapusSatuUnit(index) {
+    if (keranjang[index]) {
+      keranjang[index].qty -= 1;
+      if (keranjang[index].qty <= 0) {
+        keranjang.splice(index, 1); // Hapus produk dari array jika qty = 0
+      }
+      updateKeranjang();
+      ringkasanCheckout.style.display = 'none'; // Sembunyikan ringkasan jika isi berubah
+    }
+  }
+
+  // Tombol untuk menghapus semua isi keranjang
+  hapusKeranjangBtn.addEventListener('click', () => {
+    keranjang = [];
+    updateKeranjang();
+    ringkasanCheckout.style.display = 'none';
+  });
+
+  // Fungsi untuk menyaring produk berdasarkan kategori dan pencarian
+  function filterProduk() {
+    const kategori = kategoriFilter.value;
+    const keyword = searchInput.value.toLowerCase();
+
+    // Filter berdasarkan kategori dan kata kunci pencarian
+    const hasil = semuaProduk.filter(p =>
+      (kategori === 'all' || p.kategori === kategori) &&
+      p.nama.toLowerCase().includes(keyword)
+    );
+
+    tampilkanProduk(hasil); // Tampilkan hasil filter
+  }
+
+  // Event listener untuk filter dan pencarian
+  kategoriFilter.addEventListener('change', filterProduk);
+  searchInput.addEventListener('input', filterProduk);
+  durasiSewa.addEventListener('input', updateKeranjang);
+  window.addEventListener('load', updateKeranjang); // Perbarui saat pertama dimuat
+
+  // Fungsi ketika tombol checkout ditekan
+  checkoutBtn.addEventListener('click', () => {
+    if (keranjang.length === 0) {
+      alert("Keranjang masih kosong.");
+      return;
+    }
+
+    let durasi = parseInt(durasiSewa.value);
+    if (isNaN(durasi) || durasi < 1) {
+      durasi = 1;
+      durasiSewa.value = 1;
+    }
+
+    daftarCheckout.innerHTML = '';
+    let total = 0;
+
+    // Tambahkan item checkout ke ringkasan
+    keranjang.forEach(({ produk, qty }, i) => {
+      const li = document.createElement('li');
+      li.textContent = `${i + 1}. ${produk.nama} - Rp ${produk.harga.toLocaleString()} x ${qty} pcs x ${durasi} hari`;
+      daftarCheckout.appendChild(li);
+      total += produk.harga * qty * durasi;
+    });
+
+    // Tampilkan informasi ringkasan checkout
+    durasiCheckout.textContent = durasi;
+    totalCheckout.textContent = 'Rp ' + total.toLocaleString();
+
+    ringkasanCheckout.style.display = 'block'; // Tampilkan ringkasan
+  });
+</script>
 </body>
-
 </html>

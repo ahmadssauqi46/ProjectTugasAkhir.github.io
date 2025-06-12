@@ -1,36 +1,36 @@
-/* Reset dan Base */
+/* ===== Reset dan Base Style ===== */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  margin: 0; /* Menghilangkan margin bawaan browser */
+  padding: 0; /* Menghilangkan padding bawaan browser */
+  box-sizing: border-box; /* Supaya ukuran elemen menghitung border dan padding */
 }
 
 body {
-  font-family: 'Segoe UI', sans-serif;
-  line-height: 1.6;
-  background-color: #FAF3E0;
-  color: black;
-  background: url('background%20nikah.jpg') no-repeat center center fixed;
-  background-size: cover;
+  font-family: 'Segoe UI', sans-serif; /* Jenis font */
+  line-height: 1.6; /* Spasi antar baris */
+  background-color: #FAF3E0; /* Warna dasar background */
+  color: black; /* Warna teks utama */
+  background: url('background%20nikah.jpg') no-repeat center center fixed; /* Background gambar */
+  background-size: cover; /* Menyesuaikan ukuran gambar agar menutupi layar */
 }
 
-/* Header */
+/* ===== Bagian Header ===== */
 header {
-  display: flex;
-  justify-content: space-between;
+  display: flex; /* Menyusun elemen secara horizontal */
+  justify-content: space-between; /* Logo di kiri, navigasi di kanan */
   align-items: center;
   padding: 1rem 2rem;
   top: 0;
   z-index: 999;
-
 }
 
 .logo {
   font-weight: bold;
   font-size: 1.5rem;
-  color: #8B0000;
+  color: #8B0000; /* Warna merah tua */
 }
 
+/* ===== Navigasi ===== */
 nav a {
   margin-left: 1.5rem;
   text-decoration: none;
@@ -40,9 +40,10 @@ nav a {
 }
 
 nav a:hover {
-  color: #8B0000;
+  color: #8B0000; /* Warna saat mouse diarahkan */
 }
 
+/* ===== Banner Promo ===== */
 .promo-banner {
   width: 100%;
   padding: 2rem 0;
@@ -64,9 +65,10 @@ nav a:hover {
 }
 
 .banner-full:hover {
-  transform: scale(1.02);
+  transform: scale(1.02); /* Membesarkan sedikit saat hover */
 }
 
+/* ===== Produk Unggulan ===== */
 .produk-unggulan {
   padding: 2rem;
   border-radius: 10px;
@@ -81,7 +83,7 @@ nav a:hover {
 
 .produk-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsif */
   gap: 1.5rem;
 }
 
@@ -108,6 +110,7 @@ nav a:hover {
   transform: translateY(-5px);
 }
 
+/* ===== Tombol Detail Produk ===== */
 .btn-detail {
   margin-top: 1rem;
   background-color: olivedrab;
@@ -123,7 +126,7 @@ nav a:hover {
   background-color: #e85b4f;
 }
 
-
+/* ===== Footer ===== */
 footer {
   text-align: center;
   padding: 1rem;
@@ -132,20 +135,111 @@ footer {
   color: white;
 }
 
+/* ===== Responsif untuk Layar Kecil ===== */
 @media (max-width: 768px) {
   header {
     flex-direction: column;
-    align-items: center; 
+    align-items: center;
   }
 
   nav {
-    width: 100%; /* Tambahkan ini agar nav menyesuaikan lebar penuh */
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center; /* Tambahkan ini agar isi nav rata kiri */
+    justify-content: center;
   }
 
   nav a {
     margin: 0.5rem 1rem 0 0;
   }
+}
+
+/* ===== Bagian Kontak (yang disembunyikan dulu) ===== */
+.kontak-section {
+  background-color: #f8f8f8;
+  padding: 3rem 1rem;
+  text-align: center;
+  color: #333;
+}
+
+.kontak-section h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #8B0000;
+}
+
+.kontak-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.kontak-info {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 1.5rem;
+  border-radius: 10px;
+  width: 280px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.kontak-info:hover {
+  transform: translateY(-5px);
+}
+
+.kontak-info h3 {
+  margin-bottom: 0.5rem;
+  color: #222;
+}
+
+.kontak-info p {
+  margin: 0.2rem 0;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+/* Responsif untuk bagian kontak */
+@media (max-width: 768px) {
+  .kontak-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* ===== Section Tentang Kami (Singkat di Homepage) ===== */
+.tentang-singkat {
+  background-color: #fff;
+  padding: 3rem 1.5rem;
+  margin: 2rem 1rem;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.tentang-singkat h2 {
+  color: #8B0000;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.tentang-singkat p {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+/* Tombol ke halaman Tentang */
+.btn-tentang {
+  background-color: olivedrab;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.btn-tentang:hover {
+  background-color: #e85b4f;
 }

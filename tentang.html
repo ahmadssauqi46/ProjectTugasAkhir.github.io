@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tentang Kami - Tenda Rizky</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        /* Style khusus halaman tentang */
+        .tentang-container {
+            max-width: 1000px;
+            margin: 3rem auto;
+            padding: 2rem;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .tentang-container h1 {
+            text-align: center;
+            color: #8B0000;
+            margin-bottom: 1.5rem;
+        }
+
+        .tentang-container p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        @media (max-width: 768px) {
+            .tentang-container {
+                margin: 1rem;
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header Navigasi -->
+    <header>
+        <div class="logo">Tenda Rizky</div>
+        <nav>
+            <a href="index.html"><b>Home</b></a>
+            <a href="produk.html"><b>Produk</b></a>
+            <a href="tentang.html"><b>Tentang</b></a>
+            <a href="#" onclick="tampilkanKontak()"><b>Kontak</b></a>
+        </nav>
+    </header>
+
+    <!-- Isi Halaman Tentang Kami -->
+    <section class="tentang-container">
+        <h1>Tentang Kami</h1>
+        <!-- Paragraf deskripsi -->
+        <p>
+            <strong>Tenda Rizky</strong> adalah usaha yang bergerak di bidang penyewaan dan penjualan tenda dekorasi
+            untuk berbagai acara seperti pernikahan, hajatan, seminar, dan kegiatan lainnya.
+        </p>
+
+        <p>
+            Kami hadir untuk memberikan solusi terbaik bagi Anda yang ingin mengadakan acara dengan dekorasi tenda yang
+            nyaman, estetik, dan berkesan.Dengan berbagai pilihan model dan warna, kami siap memenuhi kebutuhan dekorasi Anda.
+        </p>
+
+        <p> Visi kami adalah menjadi pilihan utama dalam layanan penyewaan tenda dekorasi yang berkualitas di daerah kami.
+            Kami selalu mengutamakan kepuasan pelanggan dengan menjaga mutu produk dan pelayanan yang ramah serta tepat waktu.
+        </p>
+
+        <p> Dengan dukungan tim yang berpengalaman dan peralatan yang memadai,
+            kami percaya bahwa setiap acara istimewa dapat diwujudkan dengan sempurna bersama Tenda Rizky.</p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Tenda Rizky. All rights reserved.</p>
+    </footer>
+
+    <!-- Script untuk tombol kontak -->
+    <script>
+        function tampilkanKontak() {
+            // Arahkan ke halaman index bagian kontak
+            window.location.href = "index.html#kontak";
+        }
+    </script>
+    
+</body>
+</html>
