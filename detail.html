@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Detail Produk</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f9f9f9;
+    }
+
+    header {
+      background: #000;
+      color: white;
+      padding: 15px 30px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 30px auto;
+      background: white;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .image-section {
+      flex: 1 1 45%;
+      text-align: center;
+    }
+
+    .image-section img {
+      width: 100%;
+      max-height: 350px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .thumbnail {
+      margin-top: 10px;
+    }
+
+    .thumbnail img {
+      width: 70px;
+      height: 50px;
+      object-fit: cover;
+      margin: 5px;
+      border: 2px solid #ccc;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .info-section {
+      flex: 1 1 50%;
+    }
+
+    .info-section h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .harga-asli {
+      text-decoration: line-through;
+      color: #888;
+    }
+
+    .harga-diskon {
+      color: red;
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .form-group select, .form-group input {
+      width: 100%;
+      padding: 8px;
+      font-size: 16px;
+    }
+
+    .btn-pesan {
+      width: 100%;
+      padding: 12px;
+      background: #000;
+      color: #fff;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    .btn-pesan:hover {
+      background: #333;
+    }
+
+    .detail {
+      margin-top: 30px;
+    }
+
+    .detail h2 {
+      font-size: 20px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 5px;
+    }
+
+    .detail ul {
+      list-style-type: disc;
+      margin-left: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>Tenda Rizky</header>
+
+  <div class="container">
+    <div class="image-section">
+      <img id="mainImage" src="TENDA 1.jpg" alt="Tenda Coklat mix Putih">
+      <div class="thumbnail">
+        <img src="TENDA 1.jpg" onclick="gantiGambar(this.src)" />
+        <img src="TENDA 2.jpg" onclick="gantiGambar(this.src)" />
+        <img src="TENDA 3.jpg" onclick="gantiGambar(this.src)" />
+      </div>
+    </div>
+
+    <div class="info-section">
+      <h1>Tenda Coklat mix Putih</h1>
+      <p class="harga-asli">Rp 1.700.000</p>
+      <p class="harga-diskon">Rp 1.500.000 (12%)</p>
+
+      <div class="form-group">
+        <label>Warna:</label>
+        <select>
+          <option value="coklat-putih">Coklat - Putih</option>
+          <option value="coklat-emas">Coklat - Emas</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Ukuran:</label>
+        <select>
+          <option value="3x3">3x3 meter</option>
+          <option value="5x5">5x5 meter</option>
+          <option value="8x8">8x8 meter</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Jumlah:</label>
+        <input type="number" value="1" min="1" />
+      </div>
+
+      <button class="btn-pesan">Pesan Sekarang</button>
+
+      <div class="detail">
+        <h2>detail Produk</h2>
+        <ul>
+          <li>Bahan atap: Terpal kualitas premium anti bocor</li>
+          <li>Rangka: Besi galvanis tahan karat</li>
+          <li>Tinggi: 3 - 5 meter (menyesuaikan)</li>
+          <li>Motif dekorasi: Coklat kombinasi putih dengan gantungan lampu kristal</li>
+          <li>Include: Karpet lantai, tirai dekorasi, dan lighting dasar</li>
+          <li>Cocok untuk acara: Pernikahan, formal, gathering, dan event outdoor</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function gantiGambar(src) {
+      document.getElementById("mainImage").src = src;
+    }
+  </script>
+</body>
+</html>

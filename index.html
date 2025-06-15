@@ -7,15 +7,14 @@
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/png" href="favicon.png">
 </head>
-
 <body>
   <header>
     <div class="logo">Tenda Rizky</div>
     <nav>
-      <a href="#" class="active">Home</a>
-      <a href="produk.html">Produk</a>
-      <a href="tentang.html">Tentang</a>
-      <a href="#" onclick="tampilkanKontak()">Kontak</a>
+      <a href="#" class="active"><b>Home</b></a>
+      <a href="produk.html"><b>Produk</b></a>
+      <a href="tentang.html"><b>Tentang</b></a>
+      <a href="#" onclick="tampilkanKontak()"><b>Kontak</b></a>
     </nav>
   </header>
 
@@ -25,7 +24,6 @@
       <img src="banner_tenda.jpeg" alt="Banner Promo" class="banner-full">
     </div>
   </section>
-
   <!-- Produk Unggulan -->
   <section class="produk-unggulan">
     <h2>Produk Unggulan</h2>
@@ -52,7 +50,6 @@
       </div>
     </div>
   </section>
-
   <!-- Kontak -->
   <section class="kontak-section" id="kontak" style="display: none;">
     <h2>Kontak Kami</h2>
@@ -75,11 +72,11 @@
     </div>
   </section>
 
-  <!-- Tentang Singkat -->
+  <!-- Tentang Kami -->
   <section class="tentang-singkat">
     <h2>Tentang Kami</h2>
     <p>
-      Kami menyediakan layanan sewa dan jual tenda dekorasi untuk berbagai acara. Siap membantu acara Anda menjadi lebih berkesan.
+      Tenda Rizky adalah usaha yang menyediakan layanan sewa dan jual tenda dekorasi untuk berbagai acara. Kami siap membantu menjadikan acara Anda lebih berkesan dengan produk dan pelayanan terbaik.
     </p>
     <a href="tentang.html" class="btn-tentang">Baca Selengkapnya</a>
   </section>
@@ -91,8 +88,10 @@
   <script>
     function tampilkanKontak() {
       const kontak = document.getElementById("kontak");
-      kontak.style.display = "block";
-      kontak.scrollIntoView({ behavior: "smooth" });
+      if (kontak.classList.contains("hidden")) {
+        kontak.classList.remove("hidden");
+        kontak.scrollIntoView({ behavior: "smooth" });
+      }
     }
   </script>
 </body>
