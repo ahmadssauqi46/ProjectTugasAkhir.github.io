@@ -111,19 +111,26 @@ nav a:hover {
 }
 
 /* ===== Tombol Detail Produk ===== */
+/* ===== Tombol Lihat Detail (Produk) ===== */
 .btn-detail {
-  margin-top: 1rem;
-  background-color: olivedrab;
+  display: inline-block;
+  margin-top: 1.5rem;             /* Jarak dari elemen atas (teks nama produk) */
+  background-color:  #4682B4;
   color: white;
-  padding: 0.5rem 1rem;
+  padding: 0.6rem 1.4rem;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
+  text-decoration: none;          /* Hilangkan garis bawah */
+  font-weight: 500;
+  font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .btn-detail:hover {
-  background-color: #e85b4f;
+  background-color: blue;
+  text-decoration: none;          /* Pastikan tidak muncul underline saat hover */
+  transform: scale(1.05);         /* Efek memperbesar sedikit saat hover */
 }
 
 /* ===== Footer ===== */
@@ -232,7 +239,7 @@ footer {
 
 /* Tombol ke halaman Tentang */
 .btn-tentang {
-  background-color: olivedrab;
+  background-color: #4682B4;
   color: white;
   padding: 0.6rem 1.2rem;
   text-decoration: none;
@@ -241,7 +248,7 @@ footer {
 }
 
 .btn-tentang:hover {
-  background-color: #e85b4f;
+  background-color: blue;
 }
 /* contact */
 /* Untuk sembunyikan elemen */

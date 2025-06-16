@@ -205,14 +205,16 @@ h1 {
 .btn-checkout {
   background-color: #28a745;
   color: white;
-  padding: 12px 20px;
+  padding: 12px 30px;
   font-size: 1rem;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  width: 100%;
   margin-top: 15px;
   transition: background 0.3s ease;
+  max-width: 300px;         /* Batas maksimum lebar */
+  width: auto;              /* Sesuai isi tulisan */
+ 
 }
 
 .btn-checkout:hover {

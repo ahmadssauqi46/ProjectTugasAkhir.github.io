@@ -94,18 +94,26 @@
     }
 
     .btn-pesan {
+      display: inline-block;
       width: 100%;
+      margin-top: 30px;
       padding: 12px;
-      background: #000;
-      color: #fff;
+      background-color: #28a745; /* Hijau elegan */
+      color: white;
       border: none;
       font-size: 16px;
+      font-weight: bold;
+      border-radius: 8px;
+      text-decoration: none;
+      text-align: center;
       cursor: pointer;
-      margin-top: 20px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
     }
 
     .btn-pesan:hover {
-      background: #333;
+      background-color: #218838;
+      transform: scale(1.03);
+      text-decoration: none;
     }
 
     .detail {
@@ -164,10 +172,10 @@
         <input type="number" value="1" min="1" />
       </div>
 
-      <button class="btn-pesan">Pesan Sekarang</button>
+      <a class="btn-pesan" href="form_pesanan.html">Pesan Sekarang</a>
 
       <div class="detail">
-        <h2>detail Produk</h2>
+        <h2>Detail Produk</h2>
         <ul>
           <li>Bahan atap: Terpal kualitas premium anti bocor</li>
           <li>Rangka: Besi galvanis tahan karat</li>
