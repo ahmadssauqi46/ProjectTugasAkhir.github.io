@@ -3,74 +3,86 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tenda Rizky</title>
+  <title>E-commerce</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/png" href="favicon.png">
 </head>
+
 <body>
   <header>
     <div class="logo">Tenda Rizky</div>
     <nav>
-      <a href="#" class="active"><b>Home</b></a>
+      <a href="#"><b>Home</b></a>
       <a href="produk.html"><b>Produk</b></a>
-      <a href="tentang.html"><b>Tentang</b></a>
+      <a href="#"><b>Tentang</b></a>
       <a href="#" onclick="tampilkanKontak()"><b>Kontak</b></a>
     </nav>
   </header>
 
-  <!-- Banner Promo -->
+  <!-- Banner Promo dengan gambar penuh -->
   <section class="promo-banner">
     <div class="banner-wrapper">
       <img src="banner_tenda.jpeg" alt="Banner Promo" class="banner-full">
     </div>
   </section>
-  <!-- Produk Unggulan -->
+
   <section class="produk-unggulan">
     <h2>Produk Unggulan</h2>
     <div class="produk-list">
       <div class="produk">
-        <img src="TENDA 1.jpg" alt="Tenda Coklat mix Putih">
-        <p><strong>Tenda Coklat mix Putih</strong><br>Rp 1.500.000</p>
+        <img src="TENDA 1.jpg" alt="Tenda 1">
+        <p>Tenda Coklat mix Putih</p>
         <button class="btn-detail">Lihat Detail</button>
       </div>
       <div class="produk">
-        <img src="TENDA 2.jpg" alt="Tenda Biru mix Emas">
-        <p><strong>Tenda Biru mix Emas</strong><br>Rp 1.700.000</p>
+        <img src="TENDA 2.jpg" alt="Tenda 2">
+        <p>Tenda Biru mix Emas</p>
         <button class="btn-detail">Lihat Detail</button>
       </div>
       <div class="produk">
-        <img src="TENDA 3.jpg" alt="Tenda">
-        <p><strong>Tenda</strong><br>Rp 1.200.000</p>
+        <img src="TENDA 3.jpg" alt="Tenda 3">
+        <p>Tenda</p>
         <button class="btn-detail">Lihat Detail</button>
       </div>
       <div class="produk">
-        <img src="TENDA 4.jpg" alt="Kaos Merah">
-        <p><strong>Kaos Merah</strong><br>Rp 100.000</p>
+        <img src="TENDA 4.jpg" alt="Tenda 4">
+        <p>Kaos Merah</p>
         <button class="btn-detail">Lihat Detail</button>
       </div>
     </div>
   </section>
-  <!-- Kontak -->
-  <section class="kontak-section" id="kontak" style="display: none;">
+
+  <!-- Contact Section -->
+  <section class="kontak-section hidden" id="kontak">
     <h2>Kontak Kami</h2>
     <div class="kontak-container">
-      <div class="kontak-info">
-        <h3>📞 Farhan Julianor Rizky</h3>
-        <p>📧 farhananomali78@gmail.com</p>
-        <p>☎ +62 819 0415 8992</p>
+      <div class="kontak-card">
+        <img src="foto_farhan.jpg" alt="Farhan Julianor Rizky">
+        <h3>Farhan Julianor Rizky</h3>
+        <div class="kontak-detail">
+          <p>Email: farhananomali78@gmail.com</p>
+          <p>Telp: +62 819 0415 8992</p>
+        </div>
       </div>
-      <div class="kontak-info">
-        <h3>📞 Ahmad Sauqi</h3>
-        <p>📧 ahmadssauqi46@gmail.com</p>
-        <p>☎ +62 895 361 36837</p>
+      <div class="kontak-card">
+        <img src="foto_sauqi.jpg" alt="Ahmad Sauqi">
+        <h3>Ahmad Sauqi</h3>
+        <div class="kontak-detail">
+          <p>Email: ahmadssauqi46@gmail.com</p>
+          <p>Telp: +62 895 361 36837</p>
+        </div>
       </div>
-      <div class="kontak-info">
-        <h3>📞 Rafly Setiawan</h3>
-        <p>📧 raflisetiawan07711@gmail.com</p>
-        <p>☎ +62 857 0582 9223</p>
+      <div class="kontak-card">
+        <img src="foto_awan.jpg" alt="Rafly Setiawan">
+        <h3>Rafly Setiawan</h3>
+        <div class="kontak-detail">
+          <p>Email: raflisetiawan07711@gmail.com</p>
+          <p>Telp: +62 857 0582 9223</p>
+        </div>
       </div>
     </div>
   </section>
+  
+
 
   <!-- Tentang Kami -->
   <section class="tentang-singkat">
