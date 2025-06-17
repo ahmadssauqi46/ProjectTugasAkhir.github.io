@@ -77,45 +77,6 @@
       margin-bottom: 20px;
     }
 
-    .form-group {
-      margin-bottom: 15px;
-    }
-
-    .form-group label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-
-    .form-group select, .form-group input {
-      width: 100%;
-      padding: 8px;
-      font-size: 16px;
-    }
-
-    .btn-pesan {
-      display: inline-block;
-      width: 100%;
-      margin-top: 30px;
-      padding: 12px;
-      background-color: #28a745; /* Hijau elegan */
-      color: white;
-      border: none;
-      font-size: 16px;
-      font-weight: bold;
-      border-radius: 8px;
-      text-decoration: none;
-      text-align: center;
-      cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-    }
-
-    .btn-pesan:hover {
-      background-color: #218838;
-      transform: scale(1.03);
-      text-decoration: none;
-    }
-
     .detail {
       margin-top: 30px;
     }
@@ -130,6 +91,24 @@
       list-style-type: disc;
       margin-left: 20px;
     }
+
+    .btn-katalog {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-katalog:hover {
+  background-color: #0056b3;
+  transform: scale(1.03);
+}
+
   </style>
 </head>
 <body>
@@ -150,32 +129,8 @@
       <p class="harga-asli">Rp 1.700.000</p>
       <p class="harga-diskon">Rp 1.500.000 (12%)</p>
 
-      <div class="form-group">
-        <label>Warna:</label>
-        <select>
-          <option value="coklat-putih">Coklat - Putih</option>
-          <option value="coklat-emas">Coklat - Emas</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label>Ukuran:</label>
-        <select>
-          <option value="3x3">3x3 meter</option>
-          <option value="5x5">5x5 meter</option>
-          <option value="8x8">8x8 meter</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label>Jumlah:</label>
-        <input type="number" value="1" min="1" />
-      </div>
-
-      <a class="btn-pesan" href="form_pesanan.html">Pesan Sekarang</a>
-
       <div class="detail">
-        <h2>Detail Produk</h2>
+        <h2>Spesifikasi Produk</h2>
         <ul>
           <li>Bahan atap: Terpal kualitas premium anti bocor</li>
           <li>Rangka: Besi galvanis tahan karat</li>
@@ -184,6 +139,11 @@
           <li>Include: Karpet lantai, tirai dekorasi, dan lighting dasar</li>
           <li>Cocok untuk acara: Pernikahan, formal, gathering, dan event outdoor</li>
         </ul>
+
+    <div style="margin-top: 30px;">
+    <a href="produk.html" class="btn-katalog"> Katalog Produk</a>
+    </div>
+
       </div>
     </div>
   </div>

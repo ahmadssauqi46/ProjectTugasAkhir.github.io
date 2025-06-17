@@ -1,193 +1,177 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Form Pemesanan Tenda</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #1a1a1a;
-            color: #eaeaea;
-        }
-
-        .form-pemesanan {
-            background: #252525;
-            padding: 35px;
-            border-radius: 16px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-            width: 100%;
-            max-width: 500px;
-        }
-
-        .form-pemesanan h2 {
-            text-align: center;
-            color: #90caf9;
-            margin-bottom: 25px;
-            font-size: 1.7rem;
-        }
-
-        .form-group {
-            margin-bottom: 18px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 10px 15px;
-            border: 1px solid #444;
-            border-radius: 10px;
-            background-color: #333;
-            color: #fff;
-            font-size: 15px;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            border-color: #64b5f6;
-            outline: none;
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 80px;
-        }
-
-        .tanggal {
-            display: flex;
-            gap: 15px;
-        }
-
-        .tanggal .form-group {
-            flex: 1;
-        }
-
-        .btn-kirim {
-            width: 100%;
-            padding: 12px;
-            font-size: 16px;
-            font-weight: bold;
-            color: white;
-            background-color: #2196f3;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .btn-kirim:hover {
-            background-color: #1565c0;
-        }
-
-        #successMessage {
-            display: none;
-            color: #4ade80;
-            text-align: center;
-            margin-top: 15px;
-            font-weight: bold;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Form Pemesanan Tenda</title>
+  <style>
+    * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body {
+      margin: 0; padding: 0; min-height: 100vh;
+      display: flex; justify-content: center; align-items: center;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: #f5f5f5;
+    }
+    .form-pemesanan {
+      background: #1e1e1e; padding: 40px; border-radius: 18px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+      width: 100%; max-width: 520px; border: 1px solid #333;
+    }
+    .form-pemesanan h2 {
+      text-align: center; color: #90caf9; margin-bottom: 30px; font-size: 1.9rem;
+    }
+    .form-group { margin-bottom: 20px; }
+    .form-group label {
+      display: block; margin-bottom: 8px; font-size: 15px; font-weight: 600; color: #ccc;
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%; padding: 12px 16px;
+      border: 1px solid #444; border-radius: 10px;
+      background-color: #2a2a2a; color: #fff;
+    }
+    .form-group textarea { resize: vertical; min-height: 90px; }
+    .tanggal { display: flex; gap: 15px; flex-wrap: wrap; }
+    .tanggal .form-group { flex: 1; }
+    .btn-kirim {
+      width: 100%; padding: 14px; font-size: 16px; font-weight: bold; color: white;
+      background: linear-gradient(to right, #2196f3, #1e88e5);
+      border: none; border-radius: 12px; cursor: pointer;
+    }
+    .btn-kirim:hover {
+      background: linear-gradient(to right, #1e88e5, #1565c0);
+    }
+    #successMessage {
+      display: none; color: #4ade80; text-align: center;
+      margin-top: 18px; font-weight: bold; font-size: 0.95rem;
+    }
+  </style>
 </head>
 <body>
-    <div class="form-pemesanan">
-        <h2>Formulir Pemesanan</h2>
-        <form id="formPemesanan">
-            <div class="form-group">
-                <label>Nama Lengkap</label>
-                <input type="text" name="nama" placeholder="Masukkan nama lengkap" required />
-            </div>
+  <div class="form-pemesanan">
+    <h2>Formulir Pemesanan</h2>
+    <form id="formPemesanan">
+      <!-- Produk hasil checkout -->
+      <div class="form-group">
+        <label>Produk Dipesan</label>
+        <textarea id="produkField" readonly></textarea>
+      </div>
+      <div class="form-group">
+        <label>Durasi</label>
+        <input type="text" id="durasiField" readonly />
+      </div>
+      <div class="form-group">
+        <label>Total Harga</label>
+        <input type="text" id="totalField" readonly />
+      </div>
 
-            <div class="form-group">
-                <label>Nomor HP</label>
-                <input type="tel" name="telepon" placeholder="08xxxxxxxxxx" required />
-            </div>
+      <!-- Data pelanggan -->
+      <div class="form-group">
+        <label>Nama Lengkap</label>
+        <input type="text" name="nama" required />
+      </div>
+      <div class="form-group">
+        <label>Nomor HP</label>
+        <input type="tel" name="telepon" required />
+      </div>
+      <div class="form-group">
+        <label>Alamat Lengkap</label>
+        <textarea name="alamat" required></textarea>
+      </div>
+      <div class="tanggal">
+        <div class="form-group">
+          <label>Tanggal Sewa</label>
+          <input type="date" name="tanggal_sewa" required />
+        </div>
+        <div class="form-group">
+          <label>Tanggal Kembali</label>
+          <input type="date" name="tanggal_kembali" required />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Metode Pembayaran</label>
+        <select name="metode_pembayaran" required>
+          <option value="">-- Pilih Metode --</option>
+          <option value="transfer">Transfer Bank</option>
+          <option value="ewallet">E-Wallet</option>
+          <option value="cod">COD</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Bukti Pembayaran</label>
+        <input type="file" name="bukti_pembayaran" required />
+      </div>
+      <div class="form-group">
+        <label>Catatan Tambahan</label>
+        <textarea name="catatan"></textarea>
+      </div>
+      <button type="submit" class="btn-kirim">Kirim Pesanan</button>
+      <p id="successMessage">✔️ Pesanan berhasil dikirim!</p>
+    </form>
+  </div>
 
-            <div class="form-group">
-                <label>Alamat Lengkap</label>
-                <textarea name="alamat" placeholder="Masukkan alamat lengkap" required></textarea>
-            </div>
+  <!-- Firebase SDK via CDN -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
 
-            <div class="tanggal">
-                <div class="form-group">
-                    <label>Tanggal Sewa</label>
-                    <input type="date" name="tanggal_sewa" required />
-                </div>
-                <div class="form-group">
-                    <label>Tanggal Kembali</label>
-                    <input type="date" name="tanggal_kembali" required />
-                </div>
-            </div>
+  <script>
+    // Konfigurasi Firebase (ganti dengan punyamu kalau berbeda)
+    const firebaseConfig = {
+      apiKey: "AIzaSyBEO6_DbGhZjkHTDd_XtJxqtSkhrHFpfjo",
+      authDomain: "project-web-tenda.firebaseapp.com",
+      databaseURL: "https://project-web-tenda-default-rtdb.firebaseio.com",
+      projectId: "project-web-tenda",
+      storageBucket: "project-web-tenda.firebasestorage.app",
+      messagingSenderId: "75900830090",
+      appId: "1:75900830090:web:cb79fae7ed6fed599ec873"
+    };
 
-            <div class="form-group">
-                <label>Jenis Barang</label>
-                <select name="jenis_barang" required>
-                    <option value="">-- Pilih Barang --</option>
-                    <option value="tenda">Tenda Acara</option>
-                    <option value="meja">Meja</option>
-                    <option value="kursi">Kursi</option>
-                </select>
-            </div>
+    // Inisialisasi Firebase
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
 
-            <div class="form-group">
-                <label>Jumlah Barang</label>
-                <input type="number" name="jumlah" min="1" placeholder="Masukkan jumlah barang" required />
-            </div>
+    // Ambil elemen input yang menampilkan ringkasan dari localStorage
+    const fieldProduk = document.getElementById("produkField");
+    const fieldDurasi = document.getElementById("durasiField");
+    const fieldTotal = document.getElementById("totalField");
 
-            <div class="form-group">
-                <label>Metode Pembayaran</label>
-                <select name="metode_pembayaran" required>
-                    <option value="">-- Pilih Metode Pembayaran --</option>
-                    <option value="transfer">Transfer Bank</option>
-                    <option value="ewallet">E-Wallet</option>
-                    <option value="cod">Bayar di Tempat (COD)</option>
-                </select>
-            </div>
+    const dataProduk = JSON.parse(localStorage.getItem("checkoutProduk") || "[]");
+    const durasi = localStorage.getItem("checkoutDurasi") || "1";
+    const total = localStorage.getItem("checkoutTotal") || "0";
 
-            <div class="form-group">
-                <label>Upload Bukti Pembayaran</label>
-                <input type="file" name="bukti_pembayaran" accept=".jpg,.jpeg,.png,.pdf" required />
-            </div>
+    fieldProduk.value = dataProduk.map(p => `${p.nama} x ${p.qty}`).join("\n");
+    fieldDurasi.value = durasi + " hari";
+    fieldTotal.value = "Rp " + parseInt(total).toLocaleString("id-ID");
 
-            <div class="form-group">
-                <label>Catatan Tambahan (Opsional)</label>
-                <textarea name="catatan" placeholder="Masukkan catatan tambahan"></textarea>
-            </div>
+    // Kirim data pesanan ke Firebase
+    document.getElementById("formPemesanan").addEventListener("submit", function (e) {
+      e.preventDefault();
 
-            <button type="submit" class="btn-kirim">Kirim Pesanan</button>
-            <p id="successMessage">✔️ Pesanan Anda berhasil dikirim!</p>
-        </form>
-    </div>
+      const form = e.target;
+      const data = {
+        produk: fieldProduk.value,
+        durasi: fieldDurasi.value,
+        total: fieldTotal.value,
+        nama: form.nama.value,
+        telepon: form.telepon.value,
+        alamat: form.alamat.value,
+        tanggal_sewa: form.tanggal_sewa.value,
+        tanggal_kembali: form.tanggal_kembali.value,
+        metode_pembayaran: form.metode_pembayaran.value,
+        catatan: form.catatan.value,
+        status: "Menunggu"
+      };
 
-    <script>
-        document.getElementById("formPemesanan").addEventListener("submit", function (e) {
-            e.preventDefault();
-            document.getElementById("successMessage").style.display = "block";
-            this.reset();
-
-            setTimeout(() => {
-                document.getElementById("successMessage").style.display = "none";
-            }, 4000);
-        });
-    </script>
+      const timestamp = Date.now();
+      database.ref("pesanan/" + timestamp).set(data).then(() => {
+        document.getElementById("successMessage").style.display = "block";
+        form.reset();
+        setTimeout(() => {
+          document.getElementById("successMessage").style.display = "none";
+        }, 4000);
+      });
+    });
+  </script>
 </body>
 </html>
