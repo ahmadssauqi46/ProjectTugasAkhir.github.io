@@ -1,11 +1,348 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>E-commerce</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .admin-toggle {
+      position: fixed;
+      top: 1.2rem;
+      right: 1.5rem;
+      font-size: 2rem;
+      background: #fff;
+      border: none;
+      color: #111431;
+      z-index: 9999;
+      cursor: pointer;
+      padding: 0.5rem 0.8rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+      transition: background-color 0.3s ease;
+      display: none;
+    }
+
+    .admin-toggle:hover {
+      background-color: #f0f0f0;
+    }
+
+    .admin-sidebar {
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 100%;
+      width: 260px;
+      background: linear-gradient(to bottom, #111431, #1f1f3b);
+      padding: 2rem 1.5rem;
+      box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3);
+      transform: translateX(100%);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      z-index: 9998;
+      display: none;
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+    }
+
+    .admin-sidebar.show {
+      transform: translateX(0);
+      display: block;
+    }
+
+    .admin-sidebar h3 {
+      color: #f39c12;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .admin-sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .admin-sidebar ul li {
+      margin: 1rem 0;
+      padding: 0.6rem 1rem;
+      border-radius: 6px;
+      transition: background 0.3s;
+    }
+
+    .admin-sidebar ul li:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .admin-sidebar ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      display: block;
+      cursor: pointer;
+    }
+
+    body.admin .admin-toggle,
+    body.admin .admin-sidebar {
+      display: block;
+    }
+
+    .admin-content {
+      display: none;
+      animation: fadeIn 0.5s ease;
+      padding: 2rem;
+    }
+
+    .admin-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .admin-toggle {
+        font-size: 1.6rem;
+        padding: 0.4rem 0.7rem;
+        right: 1rem;
+      }
+
+      .admin-sidebar {
+        width: 85%;
+        max-width: 280px;
+        padding: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .admin-sidebar {
+        width: 100%;
+        border-radius: 0;
+      }
+    }
+  </style>
 </head>
-<body>
-    <p>hi</p>
+<body class="admin">
+  <button id="adminToggle" class="admin-toggle">&#9776;</button>
+  <aside id="adminSidebar" class="admin-sidebar">
+    <h3>Admin Panel</h3>
+    <ul>
+      <li><a onclick="switchPage('dashboard')">Dashboard</a></li>
+      <li><a onclick="switchPage('kelola-produk')">Kelola Produk</a></li>
+      <li><a onclick="switchPage('pesanan')">Lihat Pesanan</a></li>
+      <li><a onclick="switchPage('pengaturan')">Pengaturan</a></li>
+      <li><a onclick="switchPage('logout')">Logout</a></li>
+    </ul>
+  </aside>
+
+  <!-- Halaman Admin Dinamis -->
+  <main id="adminPages">
+    <!-- DASHBOARD -->
+    <section id="dashboard" class="admin-content active">
+      <h2>Dashboard</h2>
+      <div class="stat-box">
+        <p>👥 Pengunjung Hari Ini: <strong>125</strong></p>
+        <p>📦 Total Produk: <strong>43</strong></p>
+        <p>💸 Pendapatan Bulan Ini: <strong>Rp 10.500.000</strong></p>
+      </div>
+    </section>
+  
+    <!-- KELOLA PRODUK -->
+    <section id="kelola-produk" class="admin-content">
+      <h2>Kelola Produk</h2>
+      <form class="form-produk">
+        <label for="nama">Nama Produk</label>
+        <input type="text" id="nama" placeholder="Contoh: Tenda Gunung" />
+  
+        <label for="harga">Harga (Rp)</label>
+        <input type="number" id="harga" placeholder="Contoh: 150000" />
+  
+        <label for="deskripsi">Deskripsi</label>
+        <textarea id="deskripsi" placeholder="Tulis deskripsi produk..."></textarea>
+  
+        <label for="gambar">Upload Gambar</label>
+        <input type="file" id="gambar" />
+  
+        <button type="submit">Tambah Produk</button>
+      </form>
+    </section>
+  
+    <!-- PESANAN -->
+    <section id="pesanan" class="admin-content">
+      <h2>Daftar Pesanan</h2>
+      <table class="tabel-pesanan">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nama</th>
+            <th>Produk</th>
+            <th>Status</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>#123</td>
+            <td>Farhan</td>
+            <td>Tenda Lipat</td>
+            <td><span class="status pending">Menunggu</span></td>
+            <td><button>Lihat</button></td>
+          </tr>
+          <tr>
+            <td>#124</td>
+            <td>Dina</td>
+            <td>Kompor Gas</td>
+            <td><span class="status selesai">Selesai</span></td>
+            <td><button>Lihat</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  
+    <!-- PENGATURAN -->
+    <section id="pengaturan" class="admin-content">
+      <h2>Pengaturan Akun</h2>
+      <form class="form-pengaturan">
+        <label>Nama Admin</label>
+        <input type="text" value="Farhan Julianor" />
+  
+        <label>Email</label>
+        <input type="email" value="admin@webmu.com" />
+  
+        <label>Password Baru</label>
+        <input type="password" placeholder="******" />
+  
+        <button type="submit">Simpan</button>
+      </form>
+    </section>
+  
+    <!-- LOGOUT -->
+    <section id="logout" class="admin-content">
+      <h2>Logout</h2>
+      <p>Apakah kamu yakin ingin keluar?</p>
+      <button onclick="alert('Berhasil logout!')">Ya, Logout</button>
+    </section>
+  </main>
+  
+  <!-- Konten Utama Situs (disembunyikan saat admin panel aktif) -->
+  <div id="mainContent">
+    <header>
+      <div class="logo">Tenda Rizky</div>
+      <nav>
+        <a href="#"><b>Home</b></a>
+        <a href="produk.html"><b>Produk</b></a>
+        <a href="#"><b>Tentang</b></a>
+        <a href="#" onclick="tampilkanKontak()"><b>Kontak</b></a>
+      </nav>
+    </header>
+
+    <section class="promo-banner">
+      <div class="banner-wrapper">
+        <img src="banner_tenda.jpeg" alt="Banner Promo" class="banner-full" />
+      </div>
+    </section>
+
+    <section class="produk-unggulan">
+      <h2>Produk Unggulan</h2>
+      <div class="produk-list">
+        <div class="produk">
+          <img src="TENDA 1.jpg" alt="Tenda 1" />
+          <p>Tenda Coklat mix Putih</p>
+          <a class="btn-detail" href="detail.html">Lihat Detail</a>
+        </div>
+        <div class="produk">
+          <img src="TENDA 2.jpg" alt="Tenda 2" />
+          <p>Tenda Biru mix Emas</p>
+          <a class="btn-detail" href="detail.html">Lihat Detail</a>
+        </div>
+        <div class="produk">
+          <img src="TENDA 3.jpg" alt="Tenda 3" />
+          <p>Tenda</p>
+          <a class="btn-detail" href="detail.html">Lihat Detail</a>
+        </div>
+        <div class="produk">
+          <img src="TENDA 4.jpg" alt="Tenda 4" />
+          <p>Kaos Merah</p>
+          <a class="btn-detail" href="detail.html">Lihat Detail</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="kontak-section hidden" id="kontak">
+      <h2>Kontak Kami</h2>
+      <div class="kontak-container">
+        <div class="kontak-card">
+          <img src="foto_farhan.jpg" alt="Farhan Julianor Rizky" />
+          <h3>Farhan Julianor Rizky</h3>
+          <div class="kontak-detail">
+            <p>Email: farhananomali78@gmail.com</p>
+            <p>Telp: +62 819 0415 8992</p>
+          </div>
+        </div>
+        <div class="kontak-card">
+          <img src="foto_sauqi.jpg" alt="Ahmad Sauqi" />
+          <h3>Ahmad Sauqi</h3>
+          <div class="kontak-detail">
+            <p>Email: ahmadssauqi46@gmail.com</p>
+            <p>Telp: +62 895 361 36837</p>
+          </div>
+        </div>
+        <div class="kontak-card">
+          <img src="foto_awan.jpg" alt="Rafly Setiawan" />
+          <h3>Rafly Setiawan</h3>
+          <div class="kontak-detail">
+            <p>Email: raflisetiawan07711@gmail.com</p>
+            <p>Telp: +62 857 0582 9223</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="tentang-singkat">
+      <h2>Tentang Kami</h2>
+      <p>
+        Tenda Rizky adalah usaha yang menyediakan layanan sewa dan jual tenda dekorasi untuk berbagai acara. Kami siap membantu menjadikan acara Anda lebih berkesan dengan produk dan pelayanan terbaik.
+      </p>
+      <a href="tentang.html" class="btn-tentang">Baca Selengkapnya</a>
+    </section>
+
+    <footer>
+      <p>&copy; 2025 Tenda Rizky. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    function tampilkanKontak() {
+      const kontak = document.getElementById("kontak");
+      if (kontak.classList.contains("hidden")) {
+        kontak.classList.remove("hidden");
+        kontak.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const toggleBtn = document.getElementById("adminToggle");
+      const sidebar = document.getElementById("adminSidebar");
+      toggleBtn.addEventListener("click", function () {
+        sidebar.classList.toggle("show");
+      });
+    });
+
+    function switchPage(pageId) {
+      const pages = document.querySelectorAll('.admin-content');
+      pages.forEach(p => p.classList.remove('active'));
+      document.getElementById(pageId).classList.add('active');
+
+      // Sembunyikan konten utama kalau buka admin
+      const mainContent = document.getElementById("mainContent");
+      const adminPages = document.getElementById("adminPages");
+      if (pageId) {
+        mainContent.style.display = "none";
+        adminPages.style.display = "block";
+      } else {
+        mainContent.style.display = "block";
+        adminPages.style.display = "none";
+      }
+    }
+  </script>
 </body>
 </html>
